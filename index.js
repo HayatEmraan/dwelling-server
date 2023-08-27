@@ -1,16 +1,17 @@
 const express = require("express");
-const app = express();
-const cors = require("cors");
-const port = process.env.PORT || 5000;
-const jwt = require("jsonwebtoken");
-const { connectDB } = require("./db/mongodb");
 const morgan = require("morgan");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const app = express();
+const port = process.env.PORT || 5000;
+const { connectDB } = require("./db/mongodb");
 require("dotenv").config();
 app.use(cors());
 app.use(morgan("dev"));
+app.use(cookieParser());
 
 connectDB();
 
-app.use("/", require("./routes/routes"));
+app.use("/api/v2", require("./routes/v2/routes"));
 
 app.listen(port);

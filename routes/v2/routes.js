@@ -1,8 +1,7 @@
 const express = require("express");
+const { jwtSign } = require("../../middleware/jwt/sign");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("dwelling is running!");
-});
+router.post("/signature", jwtSign);
 
 module.exports = router;
