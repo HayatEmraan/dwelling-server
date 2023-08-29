@@ -12,6 +12,7 @@ app.use(cookieParser());
 
 connectDB();
 
+app.use("/api/v1", require("./routes/v1/routes"));
 app.use("/api/v2", require("./routes/v2/routes"));
 
 app.listen(port);
