@@ -1,4 +1,5 @@
-const { roomsDB } = require("../../db/mongodb");
+const { roomsDB } = require("../../../db/mongodb");
+
 
 const getRooms = async (req, res) => {
   try {

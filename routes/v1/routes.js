@@ -1,10 +1,10 @@
 const express = require("express");
-const { getRooms } = require("../../operations/rooms/rooms");
-const { getDetails } = require("../../operations/rooms/details");
-const { setUser } = require("../../operations/postuser/setuser");
-const { exitUser } = require("../../operations/postuser/exituser");
-const { getCategoryRooms } = require("../../operations/categories/category");
-const { searchResult } = require("../../operations/search/searchresult");
+const { getRooms } = require("../../operations/open/rooms/rooms");
+const { getCategoryRooms } = require("../../operations/open/categories/category");
+const { searchResult } = require("../../operations/open/search/searchresult");
+const { setUser } = require("../../utils/postuser/setuser");
+const { exitUser } = require("../../utils/postuser/exituser");
+const { getDetails } = require("../../operations/open/rooms/details");
 const router = express.Router();
 
 // get rooms

@@ -1,4 +1,5 @@
-const { roomsDB } = require("../../db/mongodb");
+const { roomsDB } = require("../../../db/mongodb");
+
 const getCategoryRooms = async (req, res) => {
   try {
     const { category } = req.query;

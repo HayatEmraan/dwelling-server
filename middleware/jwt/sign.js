@@ -1,9 +1,10 @@
 // jwt middleware
 const jwt = require("jsonwebtoken");
+const { getUser } = require("../../utils/user/user");
 require("dotenv").config();
 
 // getuser from db
-const getUser = require("../../operations/user/user");
+
 
 const jwtSign = async (req, res) => {
   const cookieOptions = {
