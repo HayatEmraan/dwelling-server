@@ -17,7 +17,7 @@ const propertyUpdate = async (req, res) => {
     );
     if (properties === null)
       return res.status(404).send({ msg: "Property not found" });
-    // if (decision === "approved") await roomsDB.insertOne(properties);
+    if (decision === "approved") await roomsDB.insertOne(properties);
 
     return res.status(200).send({ msg: "Success", data: properties });
   } catch (error) {
