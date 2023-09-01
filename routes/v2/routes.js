@@ -18,6 +18,8 @@ const {
   totalProperties,
 } = require("../../operations/admin/property/propertystats");
 const { userStats } = require("../../operations/admin/users/userstats");
+const { stripeCheckout } = require("../../operations/payment/stripeCheckout");
+const { checkoutSuccess } = require("../../operations/payment/checkoutSuccess");
 const router = express.Router();
 
 // jwt signature routes
@@ -26,6 +28,8 @@ router.post("/signature", jwtSign);
 // admin routes
 router.get("/getusers", verifyJWT, verifyId, verifyAdmin, getUsers);
 router.get("/properties", verifyJWT, verifyId, verifyAdmin, propertyList);
+router.post('/payment', stripeCheckout)
+router.get('/paymentsuccess', checkoutSuccess)
 router.patch(
   "/property/update",
   verifyJWT,
