@@ -7,6 +7,7 @@ const { exitUser } = require("../../utils/postuser/exituser");
 const { getDetails } = require("../../operations/open/rooms/details");
 const router = express.Router();
 
+
 // get rooms
 router.get("/getrooms", getRooms);
 router.get("/getdetails/:id", getDetails);

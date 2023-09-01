@@ -6,9 +6,19 @@ const app = express();
 const port = process.env.PORT || 5000;
 const { connectDB } = require("./db/mongodb");
 require("dotenv").config();
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://dwelling-bright.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(cookieParser());
+// app.use(express.json());
 
 connectDB();
 

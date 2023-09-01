@@ -9,6 +9,7 @@ const setUser = async (req, res) => {
     });
     return res.status(200).send({ msg: "Success", data: user });
   } catch (error) {
+    console.log("this is from set user");
     return res.status(500).send({ msg: "Internal Server Error" });
   }
 };

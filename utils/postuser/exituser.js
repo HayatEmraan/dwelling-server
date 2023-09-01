@@ -7,6 +7,7 @@ const exitUser = async (req, res, next) => {
     if (user) return res.status(409).send({ msg: "User already exists" });
     return next();
   } catch (error) {
+    console.log("this is from exit user");
     return res.status(500).send({ msg: "Internal server error" });
   }
 };

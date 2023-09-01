@@ -3,15 +3,13 @@ const jwt = require("jsonwebtoken");
 const { getUser } = require("../../utils/user/user");
 require("dotenv").config();
 
-// getuser from db
-
-
 const jwtSign = async (req, res) => {
   const cookieOptions = {
     maxAge: 3600000,
-    secure: true,
+    // secure: true, // Only set for HTTPS connections
     httpOnly: true,
     // domain: "dwelling-bright.vercel.app",
+    // sameSite: "None", // Adjust as needed
     path: "/",
   };
   try {
@@ -21,7 +19,8 @@ const jwtSign = async (req, res) => {
     const auid = await jwt.sign({ uid }, process.env.JWT_SECRET_KEY, {
       expiresIn: "24h",
     });
-    res.cookie("accessToken", auid, cookieOptions);
+    await res.cookie("accessToken", auid, cookieOptions);
+
     return res.status(200).send({ msg: "Cookie has been set." });
   } catch (error) {
     return res.status(500).send({ msg: "Internal Server Error" });
