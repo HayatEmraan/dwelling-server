@@ -5,6 +5,7 @@ const { searchResult } = require("../../operations/open/search/searchresult");
 const { setUser } = require("../../utils/postuser/setuser");
 const { exitUser } = require("../../utils/postuser/exituser");
 const { getDetails } = require("../../operations/open/rooms/details");
+// const {stripeCheckout} = require('../')
 const router = express.Router();
 
 

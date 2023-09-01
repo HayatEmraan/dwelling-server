@@ -8,6 +8,7 @@ const {
 } = require("../../operations/hosts/getpostrooms/getpostrooms");
 const { verifyAdmin } = require("../../middleware/admin/vadmin");
 const { getUsers } = require("../../operations/admin/users/users");
+const { updateUser } = require('../../operations/admin/users/updateuser')
 const {
   propertyList,
 } = require("../../operations/admin/property/propertylist");
@@ -17,10 +18,8 @@ const {
 const {
   totalProperties,
 } = require("../../operations/admin/property/propertystats");
-const { userStats } = require("../../operations/admin/users/userstats");
-const { verifyHost } = require("../../middleware/host/vhost");
-const { updateUser } = require("../../operations/admin/users/updateuser");
-const { blockUser } = require("../../operations/admin/users/blockuser");
+const { userStats } = require("../../operations/admin/users/updateuser");
+const { blockuser } = require("../../operations/admin/users/blockuser");
 const router = express.Router();
 
 // jwt signature routes
@@ -32,7 +31,6 @@ router.patch("/user/update", verifyJWT, verifyId, verifyAdmin, updateUser);
 router.patch("/user/block", verifyJWT, verifyId, verifyAdmin, blockUser);
 
 router.get("/properties", verifyJWT, verifyId, verifyAdmin, propertyList);
-
 router.patch(
   "/property/update",
   verifyJWT,

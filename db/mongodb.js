@@ -32,6 +32,7 @@ const reviewsDB = client.db("dwelling").collection("reviews");
 const roomsDB = client.db("dwelling").collection("rooms");
 const propertyDB = client.db("dwelling").collection("properties");
 const invoiceDB = client.db("dwelling").collection("invoice");
+const paymentDB = client.db("dwelling").collection("payments");
 const hostDB = client.db("dwelling").collection("host");
 
 module.exports = {
@@ -42,5 +43,6 @@ module.exports = {
   roomsDB,
   propertyDB,
   invoiceDB,
-  hostDB,
+  paymentDB,
+  hostDB
 };

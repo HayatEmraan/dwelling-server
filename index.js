@@ -18,7 +18,7 @@ app.use(
 );
 app.use(morgan("dev"));
 app.use(cookieParser());
-// app.use(express.json());
+app.use(express.json())
 
 connectDB();
 
