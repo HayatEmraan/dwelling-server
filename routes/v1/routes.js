@@ -12,7 +12,7 @@ const router = express.Router();
 router.get("/getrooms", getRooms);
 router.get("/getdetails/:id", getDetails);
 router.get("/category/rooms", getCategoryRooms);
-router.get("/getsearch", searchResult);
+router.get("/getsearch", searchResult); // not done 
 
 // post user
 router.post("/postuser", exitUser, setUser);

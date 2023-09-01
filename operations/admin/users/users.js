@@ -1,7 +1,6 @@
 const usersDB = require("../../../db/mongodb");
 
 const getUsers = async (req, res) => {
-  // get email from headers
   try {
     const users = await usersDB.find({}).toArray();
     return res.status(200).send({ msg: "Success", data: users });

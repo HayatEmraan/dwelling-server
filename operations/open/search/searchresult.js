@@ -1,6 +1,5 @@
 const { roomsDB } = require("../../../db/mongodb");
 
-
 const searchResult = async (req, res) => {
   try {
     const {
@@ -33,7 +32,7 @@ const searchResult = async (req, res) => {
     const formattedDate = thirtyDaysLater.toISOString().slice(0, 10);
 
     const formattedToday = today.toISOString().slice(0, 10);
-    console.log(formattedDate, formattedDate);
+    console.log(formattedToday, formattedDate);
 
     const locationQuery = {
       $or: [
@@ -44,25 +43,25 @@ const searchResult = async (req, res) => {
     };
 
     const capacityQuery = {
-      $or: [
-        { "capacity.adults": { $gte: parseInt(adult) } },
-        { "capacity.children": { $gte: parseInt(children) } },
-        { "capacity.pets": { $gte: parseInt(pets) } },
-        { "capacity.infants": { $gte: parseInt(infants) } },
+      $and: [
+        { "capacity.adults": { $gte: parseInt(adult == 5) || 0 } },
+        { "capacity.children": { $gte: parseInt(children) || 0 } },
+        { "capacity.pets": { $gte: parseInt(pets) || 0 } },
+        { "capacity.infants": { $gte: parseInt(infants) || 0 } },
       ],
     };
+    const dateRangeQuery = {
+      $and: [
+        { "dateRange.endDate": { $gte: new Date(start) } },
+        // 31 : 02
+        { "dateRange.startDate": { $lte: new Date(end) } },
+        // 01 : 10
+      ],
+    };
+    const query = {
+      $and: [{ $or: [locationQuery, capacityQuery] }],
+    };
 
-    // const dateRangeQuery = {
-    //   $and: [
-    //     {
-    //       "dateRange.startDate": { $lte: endDate },
-    //       "dateRange.endDate": { $gte: startDate },
-    //     },
-    //   ],
-    // };
-    // const query = {
-    //   $and: [{ $or: [locationQuery, capacityQuery] }],
-    // };
     const details = await roomsDB.find(capacityQuery).toArray();
     return res.status(200).send({ msg: "Success", data: details });
   } catch (error) {

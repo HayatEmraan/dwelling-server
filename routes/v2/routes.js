@@ -8,6 +8,7 @@ const {
 } = require("../../operations/hosts/getpostrooms/getpostrooms");
 const { verifyAdmin } = require("../../middleware/admin/vadmin");
 const { getUsers } = require("../../operations/admin/users/users");
+const { updateUser } = require('../../operations/admin/users/updateuser')
 const {
   propertyList,
 } = require("../../operations/admin/property/propertylist");
@@ -17,9 +18,8 @@ const {
 const {
   totalProperties,
 } = require("../../operations/admin/property/propertystats");
-const { userStats } = require("../../operations/admin/users/userstats");
-const { stripeCheckout } = require("../../operations/payment/stripeCheckout");
-const { checkoutSuccess } = require("../../operations/payment/checkoutSuccess");
+const { userStats } = require("../../operations/admin/users/updateuser");
+const { blockuser } = require("../../operations/admin/users/blockuser");
 const router = express.Router();
 
 // jwt signature routes
@@ -27,9 +27,10 @@ router.post("/signature", jwtSign);
 
 // admin routes
 router.get("/getusers", verifyJWT, verifyId, verifyAdmin, getUsers);
+router.patch("/user/update", verifyJWT, verifyId, verifyAdmin, updateUser);
+router.patch("/user/block", verifyJWT, verifyId, verifyAdmin, blockUser);
+
 router.get("/properties", verifyJWT, verifyId, verifyAdmin, propertyList);
-router.post('/payment', stripeCheckout)
-router.get('/paymentsuccess', checkoutSuccess)
 router.patch(
   "/property/update",
   verifyJWT,
@@ -37,11 +38,13 @@ router.patch(
   verifyAdmin,
   propertyUpdate
 );
+
 router.get("/properties/pending", totalProperties);
+
 router.get("/userstats", verifyJWT, verifyId, verifyAdmin, userStats);
 
 // hosts routes / ads provider
-router.post("/insertroom", verifyJWT, verifyId, insertRoom);
-router.get("/getpostrooms", verifyJWT, verifyId, getPostRooms);
+router.post("/insertroom", verifyJWT, verifyId, verifyHost, insertRoom);
+router.get("/getpostrooms", verifyJWT, verifyId, verifyHost, getPostRooms);
 
 module.exports = router;
