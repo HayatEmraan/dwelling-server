@@ -58,7 +58,7 @@ const stripeCheckout = async (req, res) => {
             },
             // optional end
 
-            success_url: `${domainUrl}/api/v2/paymentsuccess?session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${domainUrl}/api/v2/paymentsuccess?session_id={CHECKOUT_SESSION_ID}&room_id=${item.room_id}`,
             cancel_url: redirectURL + '?status=cancel',
             metadata: {
                 images: item.image,
