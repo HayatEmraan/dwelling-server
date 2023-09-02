@@ -1,10 +1,7 @@
 const { paymentDB } = require('../../db/mongodb');
-
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
 const checkoutSuccess = async (req, res) => {
     const { session_id, room_id } = req.query;
-    console.log(req.query)
     try {
         const sessionData = await stripe.checkout.sessions.retrieve(session_id);
         console.log(sessionData)
@@ -21,14 +18,7 @@ const checkoutSuccess = async (req, res) => {
             payment_intent,
             status
         }
-
         const payments = await paymentDB.insertOne(paymentData)
-
-
-
-
-
-
         await res.redirect('https://www.facebook.com/')
     }
     catch (err) {

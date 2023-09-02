@@ -18,8 +18,9 @@ const {
 const {
   totalProperties,
 } = require("../../operations/admin/property/propertystats");
-const { userStats } = require("../../operations/admin/users/updateuser");
-const { blockuser } = require("../../operations/admin/users/blockuser");
+const { blockUser } = require("../../operations/admin/users/blockuser");
+const { verifyHost } = require("../../middleware/host/vhost");
+const { userStats } = require("../../operations/admin/users/userstats");
 const router = express.Router();
 
 // jwt signature routes
