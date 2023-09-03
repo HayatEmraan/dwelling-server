@@ -3,8 +3,8 @@ const { usersDB } = require("../../db/mongodb");
 
 const verifyAdmin = (req, res, next) => {
   try {
-    const id = req.uid;
-    const user = usersDB.findOne({ _id: new ObjectId(id), role: "admin" });
+    const { uid } = req.uid;
+    const user = usersDB.findOne({ _id: new ObjectId(uid), role: "admin" });
     if (!user) return res.status(401).send({ msg: "Unauthorized access" });
     next();
   } catch (error) {

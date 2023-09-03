@@ -1,4 +1,4 @@
-const usersDB = require("../../../db/mongodb");
+const { usersDB } = require("../../../db/mongodb");
 
 const getUsers = async (req, res) => {
   try {

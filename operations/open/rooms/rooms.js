@@ -1,6 +1,5 @@
 const { roomsDB } = require("../../../db/mongodb");
 
-
 const getRooms = async (req, res) => {
   try {
     const rooms = await roomsDB

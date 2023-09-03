@@ -3,8 +3,8 @@ const { usersDB } = require("../../db/mongodb");
 
 const verifyHost = (req, res, next) => {
   try {
-    const { id } = req.user;
-    const user = usersDB.findOne({ _id: new ObjectId(id), role: "host" });
+    const { uid } = req.uid;
+    const user = usersDB.findOne({ _id: new ObjectId(uid), role: "host" });
     if (!user) return res.status(401).send({ msg: "Unauthorized access" });
     next();
   } catch (error) {
