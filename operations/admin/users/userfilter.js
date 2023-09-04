@@ -1,15 +1,27 @@
 const { usersDB } = require("../../../db/mongodb");
 
-const getUsers = async (req, res) => {
+const usersFilter = async (req, res) => {
   try {
+    const { query } = req.query;
     const page = parseInt(req.query.page) || 1;
-    const pageSize = 3;
+    const pageSize = 5;
     const skip = (page - 1) * pageSize;
-    const count = await usersDB.countDocuments({});
+
+    const userFilter = { role: query };
+
+    const count = await usersDB.countDocuments(userFilter);
     const totalPages = Math.ceil(count / pageSize);
-    const users = await usersDB.find({}).skip(skip).limit(pageSize).toArray();
+
+    const users = await usersDB
+      .find(userFilter)
+      .skip(skip)
+      .limit(pageSize)
+      .toArray();
+
     const startItem = skip + 1;
     const endItem = Math.min(skip + pageSize, count);
+
+    if (!users) return res.status(401).send({ msg: "Unauthorized access" });
 
     return res.status(200).send({
       msg: "Success",
@@ -25,5 +37,5 @@ const getUsers = async (req, res) => {
 };
 
 module.exports = {
-  getUsers,
+  usersFilter,
 };

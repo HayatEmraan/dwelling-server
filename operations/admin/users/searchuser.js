@@ -1,19 +1,34 @@
 const { usersDB } = require("../../../db/mongodb");
 
-const getUsers = async (req, res) => {
+const searchUser = async (req, res) => {
   try {
+    const { query } = req.query;
     const page = parseInt(req.query.page) || 1;
-    const pageSize = 3;
+    const pageSize = 5;
     const skip = (page - 1) * pageSize;
-    const count = await usersDB.countDocuments({});
+
+    const searchFilter = {
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { email: { $regex: query, $options: "i" } },
+      ],
+    };
+
+    const count = await usersDB.countDocuments(searchFilter);
     const totalPages = Math.ceil(count / pageSize);
-    const users = await usersDB.find({}).skip(skip).limit(pageSize).toArray();
+
+    const userDetails = await usersDB
+      .find(searchFilter)
+      .skip(skip)
+      .limit(pageSize)
+      .toArray();
+
     const startItem = skip + 1;
     const endItem = Math.min(skip + pageSize, count);
 
     return res.status(200).send({
       msg: "Success",
-      data: users,
+      data: userDetails,
       currentPage: page,
       totalPages: totalPages,
       startView: `${startItem} - ${endItem}`,
@@ -25,5 +40,5 @@ const getUsers = async (req, res) => {
 };
 
 module.exports = {
-  getUsers,
+  searchUser,
 };

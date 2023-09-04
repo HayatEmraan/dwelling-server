@@ -8,7 +8,7 @@ const {
 } = require("../../operations/hosts/getpostrooms/getpostrooms");
 const { verifyAdmin } = require("../../middleware/admin/vadmin");
 const { getUsers } = require("../../operations/admin/users/users");
-const { updateUser } = require('../../operations/admin/users/updateuser')
+const { updateUser } = require("../../operations/admin/users/updateuser");
 const {
   propertyList,
 } = require("../../operations/admin/property/propertylist");
@@ -21,6 +21,8 @@ const {
 const { blockUser } = require("../../operations/admin/users/blockuser");
 const { verifyHost } = require("../../middleware/host/vhost");
 const { userStats } = require("../../operations/admin/users/userstats");
+const { searchUser } = require("../../operations/admin/users/searchuser");
+const { usersFilter } = require("../../operations/admin/users/userfilter");
 const router = express.Router();
 
 // jwt signature routes
@@ -43,6 +45,8 @@ router.patch(
 router.get("/properties/pending", totalProperties);
 
 router.get("/userstats", verifyJWT, verifyId, verifyAdmin, userStats);
+router.get("/searchuser", verifyJWT, verifyId, verifyAdmin, searchUser);
+router.get("/usersfilter", usersFilter);
 
 // hosts routes / ads provider
 router.post("/insertroom", verifyJWT, verifyId, verifyHost, insertRoom);
