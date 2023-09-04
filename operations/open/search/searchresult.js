@@ -3,9 +3,7 @@ const { roomsDB } = require("../../../db/mongodb");
 const searchResult = async (req, res) => {
   try {
     const {
-      region,
-      country,
-      area,
+      location = "Asian",
       start,
       end,
       adults,
@@ -13,20 +11,19 @@ const searchResult = async (req, res) => {
       pets,
       infants,
     } = req.query;
+
     const today = new Date();
     const thirtyDaysLater = new Date(today);
     thirtyDaysLater.setDate(today.getDate() + 30);
     const formattedDate = thirtyDaysLater.toISOString().slice(0, 10);
     const formattedToday = today.toISOString().slice(0, 10);
 
-    const defaultRegion = country || area ? region : "Asian";
-
     const locationQuery = {
       $or: [
-        { "location.city": { $regex: "" + area + "", $options: "i" } },
-        { "location.country": { $regex: "" + country + "", $options: "i" } },
+        { "location.city": { $regex: "" + location + "", $options: "i" } },
+        { "location.country": { $regex: "" + location + "", $options: "i" } },
         {
-          "location.region": { $regex: "" + defaultRegion + "", $options: "i" },
+          "location.region": { $regex: "" + location + "", $options: "i" },
         },
       ],
     };
