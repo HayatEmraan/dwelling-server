@@ -3,7 +3,7 @@ const { propertyDB } = require("../../../db/mongodb");
 const propertyList = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const pageSize = 5;
+    const pageSize = 8;
     const skip = (page - 1) * pageSize;
 
     const count = await propertyDB.countDocuments({});

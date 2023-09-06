@@ -3,7 +3,7 @@ const { usersDB } = require("../../../db/mongodb");
 const getUsers = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const pageSize = 3;
+    const pageSize = 8;
     const skip = (page - 1) * pageSize;
     const count = await usersDB.countDocuments({});
     const totalPages = Math.ceil(count / pageSize);

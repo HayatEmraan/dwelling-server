@@ -23,6 +23,7 @@ const { verifyHost } = require("../../middleware/host/vhost");
 const { userStats } = require("../../operations/admin/users/userstats");
 const { searchUser } = require("../../operations/admin/users/searchuser");
 const { usersFilter } = require("../../operations/admin/users/userfilter");
+const { unblockUser } = require("../../operations/admin/users/unblockuser");
 const router = express.Router();
 
 // jwt signature routes
@@ -31,7 +32,11 @@ router.post("/signature", jwtSign);
 // admin routes
 router.get("/getusers", verifyJWT, verifyId, verifyAdmin, getUsers);
 router.patch("/user/update", verifyJWT, verifyId, verifyAdmin, updateUser);
+router.get("/userstats", verifyJWT, verifyId, verifyAdmin, userStats);
+router.get("/searchuser", verifyJWT, verifyId, verifyAdmin, searchUser);
+router.get("/usersfilter", verifyJWT, verifyId, verifyAdmin, usersFilter);
 router.patch("/user/block", verifyJWT, verifyId, verifyAdmin, blockUser);
+router.patch("/user/unblock", verifyJWT, verifyId, verifyAdmin, unblockUser);
 
 router.get("/properties", verifyJWT, verifyId, verifyAdmin, propertyList);
 router.patch(
@@ -41,12 +46,7 @@ router.patch(
   verifyAdmin,
   propertyUpdate
 );
-
-router.get("/properties/pending", totalProperties);
-
-router.get("/userstats", verifyJWT, verifyId, verifyAdmin, userStats);
-router.get("/searchuser", verifyJWT, verifyId, verifyAdmin, searchUser);
-router.get("/usersfilter", usersFilter);
+router.get("/properties/stats", totalProperties);
 
 // hosts routes / ads provider
 router.post("/insertroom", verifyJWT, verifyId, verifyHost, insertRoom);

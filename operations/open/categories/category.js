@@ -4,7 +4,7 @@ const getCategoryRooms = async (req, res) => {
   try {
     const { category } = req.query;
     const rooms = await roomsDB
-      .find({ category })
+      .find({ category: { $regex: category, $options: "i" } })
       .project({
         _id: 1,
         name: 1,
@@ -21,7 +21,6 @@ const getCategoryRooms = async (req, res) => {
   }
 };
 
-
 module.exports = {
-  getCategoryRooms
-}
+  getCategoryRooms,
+};

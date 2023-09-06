@@ -4,7 +4,7 @@ const usersFilter = async (req, res) => {
   try {
     const { query } = req.query;
     const page = parseInt(req.query.page) || 1;
-    const pageSize = 5;
+    const pageSize = 8;
     const skip = (page - 1) * pageSize;
 
     const userFilter = { role: query };
