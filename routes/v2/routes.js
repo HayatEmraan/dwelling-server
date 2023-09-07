@@ -24,6 +24,7 @@ const { userStats } = require("../../operations/admin/users/userstats");
 const { searchUser } = require("../../operations/admin/users/searchuser");
 const { usersFilter } = require("../../operations/admin/users/userfilter");
 const { unblockUser } = require("../../operations/admin/users/unblockuser");
+const { getUserByCookie } = require("../../utils/user/getuser");
 const router = express.Router();
 
 // jwt signature routes
@@ -37,6 +38,9 @@ router.get("/searchuser", verifyJWT, verifyId, verifyAdmin, searchUser);
 router.get("/usersfilter", verifyJWT, verifyId, verifyAdmin, usersFilter);
 router.patch("/user/block", verifyJWT, verifyId, verifyAdmin, blockUser);
 router.patch("/user/unblock", verifyJWT, verifyId, verifyAdmin, unblockUser);
+
+// get user by cookies
+router.get("/user/getuserbycookie", verifyJWT, getUserByCookie);
 
 router.get("/properties", verifyJWT, verifyId, verifyAdmin, propertyList);
 router.patch(
