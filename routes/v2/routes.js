@@ -25,6 +25,8 @@ const { searchUser } = require("../../operations/admin/users/searchuser");
 const { usersFilter } = require("../../operations/admin/users/userfilter");
 const { unblockUser } = require("../../operations/admin/users/unblockuser");
 const { getUserByCookie } = require("../../utils/user/getuser");
+const { filterProperty } = require("../../operations/admin/property/filterproperty");
+const { searchProperty } = require("../../operations/admin/property/searchproperty");
 const router = express.Router();
 
 // jwt signature routes
@@ -50,7 +52,15 @@ router.patch(
   verifyAdmin,
   propertyUpdate
 );
-router.get("/properties/stats", totalProperties);
+router.get(
+  "/properties/stats",
+  verifyJWT,
+  verifyId,
+  verifyAdmin,
+  totalProperties
+);
+router.get("/filterproperties", verifyJWT, verifyId, verifyAdmin, filterProperty);
+router.get("/searchproperty", verifyJWT, verifyId, verifyAdmin, searchProperty);
 
 // hosts routes / ads provider
 router.post("/insertroom", verifyJWT, verifyId, verifyHost, insertRoom);

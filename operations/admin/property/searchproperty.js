@@ -10,10 +10,10 @@ const searchProperty = async (req, res) => {
     const searchFilter = {
       $or: [
         { name: { $regex: query, $options: "i" } },
-        { email: { $regex: query, $options: "i" } },
+        { propertyID: { $regex: query, $options: "i" } },
       ],
     };
-    const count = await propertyDB.countDocuments({});
+    const count = await propertyDB.countDocuments(searchFilter);
     const totalPages = Math.ceil(count / pageSize);
 
     const properties = await propertyDB
