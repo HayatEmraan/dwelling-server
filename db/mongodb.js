@@ -34,6 +34,7 @@ const propertyDB = client.db("dwelling").collection("properties");
 const invoiceDB = client.db("dwelling").collection("invoice");
 const paymentDB = client.db("dwelling").collection("payments");
 const hostDB = client.db("dwelling").collection("host");
+const pendingPaymentDB = client.db("dwelling").collection("pendingPayment");
 
 module.exports = {
   connectDB,
@@ -44,5 +45,6 @@ module.exports = {
   propertyDB,
   invoiceDB,
   paymentDB,
-  hostDB
+  hostDB,
+  pendingPaymentDB,
 };
