@@ -79,6 +79,6 @@ router.get("/getpostrooms", verifyJWT, verifyId, verifyHost, getPostRooms);
 
 // payment interface
 
-router.post("/payment/ssl", paymentIntentSSL);
+router.post("/payment/ssl", verifyJWT, verifyId, paymentIntentSSL);
 
 module.exports = router;

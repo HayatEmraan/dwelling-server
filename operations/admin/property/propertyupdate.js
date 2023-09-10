@@ -9,20 +9,13 @@ const propertyUpdate = async (req, res) => {
     const { name } = user;
     const filter = { _id: new ObjectId(id) };
     const update = { $set: { status: decision, checkedBy: name } };
-
-    const options = {
-      returnOriginal: false,
-    };
-    const properties = await propertyDB.findOneAndUpdate(
-      filter,
-      update,
-      options
-    );
-    if (properties === null)
+    const updateProperty = await propertyDB.updateOne(filter, update);
+    const findProperty = await propertyDB.findOne(filter);
+    if (findProperty === null)
       return res.status(404).send({ msg: "Property not found" });
-    if (decision === "approved") await roomsDB.insertOne(properties);
-
-    return res.status(200).send({ msg: "Success", data: properties.value });
+    if (decision === "approved") await roomsDB.insertOne(findProperty);
+    if (decision === "declined") await roomsDB.deleteOne(filter);
+    return res.status(200).send({ msg: "Success", data: updateProperty });
   } catch (error) {
     return res.status(500).send({ msg: "Internal Server Error" });
   }
