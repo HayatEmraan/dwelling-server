@@ -3,10 +3,10 @@ const { usersDB } = require("../../db/mongodb");
 
 const profileImg = async (req, res) => {
   try {
-    const { id } = req?.query;
+    const { uid } = req.uid;
     const { photoURL } = req?.body;
     const user = await usersDB.updateOne(
-      { _id: new ObjectId(id) },
+      { _id: new ObjectId(uid) },
       { $set: { photoURL } }
     );
     return res.status(200).send({ msg: "Success", data: user });

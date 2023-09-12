@@ -3,7 +3,7 @@ const { usersDB } = require("../../db/mongodb");
 
 const profileUpdate = async (req, res) => {
   try {
-    const { id } = req.query;
+    const { uid } = req.uid;
     const {
       name,
       address,
@@ -16,7 +16,7 @@ const profileUpdate = async (req, res) => {
       dialingCode,
     } = req?.body;
     const user = await usersDB.updateOne(
-      { _id: new ObjectId(id) },
+      { _id: new ObjectId(uid) },
       {
         $set: {
           name,
