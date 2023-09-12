@@ -31,7 +31,20 @@ const {
 const {
   searchProperty,
 } = require("../../operations/admin/property/searchproperty");
-const { paymentIntentSSL } = require("../../operations/payment/ssl/commerz");
+const {
+  paymentIntentSSL,
+  paymentAcceptSSL,
+  paymentFailedSSL,
+} = require("../../operations/payment/ssl/commerz");
+const { verifyCookies } = require("../../middleware/jwt/cookie/verifycookie");
+const {
+  stripePay,
+  stripeConfig,
+  paymentAcceptStripe,
+  paymentFailedStripe,
+} = require("../../operations/payment/stripe/stripe");
+const { profileImg } = require("../../operations/profile/profileimg");
+const { profileUpdate } = require("../../operations/profile/profileupdate");
 const router = express.Router();
 
 // jwt signature routes
@@ -79,6 +92,19 @@ router.get("/getpostrooms", verifyJWT, verifyId, verifyHost, getPostRooms);
 
 // payment interface
 
+// ssl commerz payment
 router.post("/payment/ssl", verifyJWT, verifyId, paymentIntentSSL);
+router.post("/payment/success/intent", paymentAcceptSSL);
+router.post("/payment/failed/intent", paymentFailedSSL);
+
+// stripe payment
+router.post("/payment/stripe", verifyJWT, verifyId, stripePay);
+router.get("/payment/strip/config", verifyJWT, verifyId, stripeConfig);
+router.get("/payment/failed/stripe", paymentFailedStripe);
+router.get("/payment/success/stripe", paymentAcceptStripe);
+
+// update user img & info
+router.patch("/user/updateimg", verifyJWT, verifyId, profileImg);
+router.patch("/user/updateinfo", verifyJWT, verifyId, profileUpdate);
 
 module.exports = router;
