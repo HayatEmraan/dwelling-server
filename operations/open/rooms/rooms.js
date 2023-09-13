@@ -4,6 +4,7 @@ const getRooms = async (req, res) => {
   try {
     const rooms = await roomsDB
       .find({})
+      .sort({ _id: -1 })
       .project({
         _id: 1,
         name: 1,

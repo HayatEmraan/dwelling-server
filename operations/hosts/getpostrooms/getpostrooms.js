@@ -12,6 +12,7 @@ const getPostRooms = async (req, res) => {
 
     const rooms = await propertyDB
       .find({ host: uid })
+      .sort({ _id: -1 })
       .skip(skip)
       .limit(pageSize)
       .toArray();

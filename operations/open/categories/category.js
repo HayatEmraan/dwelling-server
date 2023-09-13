@@ -5,6 +5,7 @@ const getCategoryRooms = async (req, res) => {
     const { category } = req.query;
     const rooms = await roomsDB
       .find({ category: { $regex: category, $options: "i" } })
+      .sort({ _id: -1 })
       .project({
         _id: 1,
         name: 1,

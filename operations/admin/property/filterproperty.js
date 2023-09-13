@@ -11,6 +11,7 @@ const filterProperty = async (req, res) => {
     const totalPages = Math.ceil(count / pageSize);
     const properties = await propertyDB
       .find(propertiesFilter)
+      .sort({ _id: -1 })
       .skip(skip)
       .limit(pageSize)
       .toArray();

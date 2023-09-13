@@ -45,7 +45,7 @@ const searchResult = async (req, res) => {
       $and: [locationQuery, capacityQuery, dateRangeQuery],
     };
 
-    const details = await roomsDB.find(query).toArray();
+    const details = await roomsDB.find(query).sort({ _id: -1 }).toArray();
     return res.status(200).send({ msg: "Success", data: details });
   } catch (error) {
     return res.status(500).send({ msg: "Internal Server Error" });

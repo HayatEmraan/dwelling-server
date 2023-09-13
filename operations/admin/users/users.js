@@ -7,7 +7,12 @@ const getUsers = async (req, res) => {
     const skip = (page - 1) * pageSize;
     const count = await usersDB.countDocuments({});
     const totalPages = Math.ceil(count / pageSize);
-    const users = await usersDB.find({}).skip(skip).limit(pageSize).toArray();
+    const users = await usersDB
+      .find({})
+      .sort({ _id: -1 })
+      .skip(skip)
+      .limit(pageSize)
+      .toArray();
     const startItem = skip + 1;
     const endItem = Math.min(skip + pageSize, count);
 

@@ -11,6 +11,7 @@ const propertyList = async (req, res) => {
 
     const properties = await propertyDB
       .find({})
+      .sort({ _id: -1 })
       .skip(skip)
       .limit(pageSize)
       .toArray();

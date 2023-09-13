@@ -1,4 +1,5 @@
-const { propertyDB } = require("../../../db/mongodb");
+const { ObjectId } = require("mongodb");
+const { propertyDB, usersDB } = require("../../../db/mongodb");
 
 function generateRandomNumber() {
   const min = 100000000;
@@ -10,6 +11,13 @@ function generateRandomNumber() {
 const insertRoom = async (req, res) => {
   try {
     const { uid } = req.uid;
+    const { _id, name, photoURL } = await usersDB.findOne({
+      _id: new ObjectId(uid),
+    });
+
+    if (!uid) {
+      return res.status(404).send({ msg: "author not found" });
+    }
     const propertyID = generateRandomNumber();
     const date = new Date();
     const options = {
@@ -26,6 +34,11 @@ const insertRoom = async (req, res) => {
     const createdAt = formattedDate + " " + "(UTC)";
     const room = await propertyDB.insertOne({
       ...req.body,
+      author: {
+        _id,
+        name,
+        photo: photoURL,
+      },
       createdAt,
       propertyID,
       host: uid,

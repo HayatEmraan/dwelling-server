@@ -14,6 +14,7 @@ const usersFilter = async (req, res) => {
 
     const users = await usersDB
       .find(userFilter)
+      .sort({ _id: -1 })
       .skip(skip)
       .limit(pageSize)
       .toArray();
