@@ -1,0 +1,229 @@
+{
+  "_id": { "$oid": "650460943073331f6d569c9a" },
+  "name": "Luxury Villa RH",
+  "location": {
+    "city": "Saint Martin Island",
+    "country": "Bangladesh",
+    "region": "Asian"
+  },
+  "status": "approved",
+  "category": "Luxury",
+  "capacity": {
+    "adults": { "$numberInt": "4" },
+    "children": { "$numberInt": "2" },
+    "pets": { "$numberInt": "3" },
+    "infants": { "$numberInt": "1" }
+  },
+  "availability": {
+    "guests": { "$numberInt": "4" },
+    "bedrooms": { "$numberInt": "3" },
+    "beds": { "$numberInt": "4" },
+    "baths": { "$numberInt": "2" }
+  },
+  "images": [
+    "https://images.unsplash.com/photo-1691231862377-7e55d4e6a2c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    "https://images.unsplash.com/photo-1670517007659-0f32403f236c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+    "https://images.unsplash.com/photo-1690746138480-1245dc220809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    "https://i.ibb.co/pWYRN9S/img-1.png",
+    "https://i.ibb.co/RN53Mkd/img-2.png",
+    "https://i.ibb.co/nRQcR6q/img-3.png"
+  ],
+  "description": "Located in Chittagong, Hotel Saint Martin Ltd. Offers 3-star accommodations with a restaurant and a bar. Featuring a garden, the 3-star hotel has air-conditioned rooms with free WiFi, each with a private bathroom. The property provides room service and a 24-hour front desk for guests. At the hotel, all rooms have a desk and a flat-screen TV. At Hotel Saint Martin Ltd. Every room comes with bed linen and towels. A buffet breakfast is available daily at the accommodation. The nearest airport is Shah Amanat International Airport, 6.2 miles from Hotel Saint Martin Ltd..",
+  "price": { "$numberInt": "30" },
+  "taxes": { "$numberInt": "10" },
+  "rating": { "$numberDouble": "4.5" },
+  "dateRange": { "startDate": "2023-01-01", "endDate": "2023-01-31" },
+  "author": {
+    "name": "Jessica Anderson",
+    "photo": "https://i.ibb.co/QD5f97y/images.jpg",
+    "about": "I'm a travel enthusiast who loves exploring exotic destinations and sharing my experiences with fellow travelers. My goal is to provide you with unforgettable getaways!"
+  },
+  "popular_facilities": [
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691057/k7mops5aemowqqkb8pui.svg",
+      "name": "Wi-Fi",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691057/hs4i5zsl3lzhwkmdlzo7.svg",
+      "name": "Bar",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691193/j0uklxcvj9lzy3ugxyxc.svg",
+      "name": "Gym",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691892/bbhghs5z4bdnmbav9ctn.svg",
+      "name": "Parking",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691417/x7iul59fvdtsjtsddkea.svg",
+      "name": "Coffee",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692690716/giirnz9fgrj4lwqq5xh2.svg",
+      "name": "Room Service",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691057/kksjojjgt5pj6vfj7gio.svg",
+      "name": "Garden",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691057/isql8s6hlfcjvirt0cgb.svg",
+      "name": "Air conditioning",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691057/lqsf7fnqirhdmckv4o8e.svg",
+      "name": "Family rooms",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692690717/bfrgk2wttnai0ie6nx1e.svg",
+      "name": "Front desk",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692690717/tkzovtn3uq98zdoh0sqp.svg",
+      "name": "Lockers",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692690081/qdoqdmzod9wzdjez3xfn.svg",
+      "name": "Ironing service",
+      "offer": true
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692690717/eizsexfvzto5e5bbeptl.svg",
+      "name": "No smoking",
+      "offer": true
+    }
+  ],
+  "facilities": [
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692690717/ogfefrtrhu18wibuynlw.svg",
+      "name": "Bathroom",
+      "facilities": ["Shower", "Bathtub", "Toilet", "Slippers", "Hairdryer"]
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691892/nndz6gyqwfxdr7vqktsi.svg",
+      "name": "Media & Entertainment",
+      "facilities": ["Flat-screen TV", "DVD player", "Soundproofing"]
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692690718/r4euoq8ebeicl6ept8h9.svg",
+      "name": "Living area",
+      "facilities": ["Desk"]
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692690718/luf3cwe8dmsirikbhzes.svg",
+      "name": "Bedroom",
+      "facilities": ["Linens", "Duvet"]
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692691892/vnrkzcgwli32pqwlfuiw.svg",
+      "name": "Internet",
+      "facilities": ["Wi-Fi", "Ethernet", "Hotspot"]
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692690717/yvxdgybsszdoh1igoaoo.svg",
+      "name": "Language",
+      "facilities": ["English", "Spanish", "French"]
+    }
+  ],
+  "house_rules": [
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692692851/zeiqcd82orjubexz6wgg.svg",
+      "name": "Check in",
+      "time": "12:00 PM"
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692692851/wfbjzyil59ubwec0nias.svg",
+      "name": "Check out",
+      "time": "12:00 PM"
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692692851/n8c3nwnxeyiwdjop8gt4.svg",
+      "name": "Cancellation",
+      "des": "Free cancellation up to 7 days before arrival."
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692692851/ywdokjfsev4rkhik9d1s.svg",
+      "name": "Children & Beds",
+      "des": "Children are welcome. Extra beds available."
+    },
+    {
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1692692851/pbapmple7pyfok2jbklg.svg",
+      "name": "Age restriction",
+      "des": "No age restrictions."
+    }
+  ],
+  "payment_methods": [
+    {
+      "providerName": "Master Card",
+      "accepted": true,
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1693244098/gdvhlkdaefjdliwrl8vy.svg"
+    },
+    {
+      "providerName": "VISA Card",
+      "accepted": true,
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1693244098/bcmtypdecdugr6bipzgx.svg"
+    },
+    {
+      "providerName": "Discover Card",
+      "accepted": false,
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1693244098/hz989hhvwy2dj8hlpcsc.png"
+    },
+    {
+      "providerName": "American Express",
+      "accepted": true,
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1693244098/s4qzhx00abdlxf30rfem.svg"
+    },
+    {
+      "providerName": "Diners Club",
+      "accepted": false,
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1693244098/tbnaqxc337ghnagqcwgz.svg"
+    },
+    {
+      "providerName": "UnionPay",
+      "accepted": true,
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1693244280/ehqq4ylkzwjpdtqdtw2j.png"
+    },
+    {
+      "providerName": "PayPal",
+      "accepted": false,
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1693244099/n2y2ibcoiydtsq8wd6xs.svg"
+    },
+    {
+      "providerName": "Cash on Arrival",
+      "accepted": false,
+      "image": "https://res.cloudinary.com/dkozp31ij/image/upload/v1693244099/s1jytaczagoti5ql5ftj.svg"
+    }
+  ],
+  "reviews": [
+    {
+      "reviewer_name": "John Doe",
+      "date": "2023-07-15",
+      "photo": "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "rating": { "$numberInt": "4" },
+      "comment": "Had an amazing time at the resort. The staff was friendly and the views were breathtaking."
+    },
+    {
+      "reviewer_name": "Jane Smith",
+      "date": "2023-06-28",
+      "photo": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+      "rating": { "$numberInt": "5" },
+      "comment": "This was the best vacation ever! Everything was perfect, from the room to the service."
+    }
+  ],
+  "host": "64f0a39d3f70f34e10ccc8b5",
+  "checkedBy": "BrightCoders",
+  "propertyID": "177575919",
+  "createdAt": "Sep 8, 2023, 04:38 (UTC)"
+}

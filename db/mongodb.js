@@ -26,6 +26,23 @@ async function connectDB() {
   }
 }
 
+const usersDB = client.db("dwelling").collection("users");
+const reviewsDB = client.db("dwelling").collection("reviews");
+const roomsDB = client.db("dwelling").collection("rooms");
+const propertyDB = client.db("dwelling").collection("properties");
+const invoiceDB = client.db("dwelling").collection("invoice");
+const paymentDB = client.db("dwelling").collection("payments");
+const hostDB = client.db("dwelling").collection("host");
+const pendingPaymentDB = client.db("dwelling").collection("pendingPayment");
+
 module.exports = {
   connectDB,
+  usersDB,
+  reviewsDB,
+  roomsDB,
+  propertyDB,
+  invoiceDB,
+  paymentDB,
+  hostDB,
+  pendingPaymentDB,
 };
