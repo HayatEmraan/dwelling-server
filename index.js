@@ -8,7 +8,11 @@ const { connectDB } = require("./db/mongodb");
 require("dotenv").config();
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://dwelling-bright.vercel.app"],
+    origin: [
+      "http://localhost:3000",
+      "https://dwelling-bright.vercel.app",
+      "https://dwl-mu.vercel.app/",
+    ],
     credentials: true,
   })
 );

@@ -45,6 +45,35 @@ const {
 } = require("../../operations/payment/stripe/stripe");
 const { profileImg } = require("../../operations/profile/profileimg");
 const { profileUpdate } = require("../../operations/profile/profileupdate");
+const getbookings = require("../../operations/admin/booking/getbookings");
+const gethosts = require("../../operations/admin/host/gethosts");
+const searchhost = require("../../operations/admin/host/searchhost");
+const getinvoices = require("../../operations/admin/invoice/getinvoices");
+const searchinvoices = require("../../operations/admin/invoice/searchinvoices");
+const {
+  filterinvoices,
+} = require("../../operations/admin/invoice/filterinvoices");
+const totalstats = require("../../operations/admin/invoice/totalstats");
+const {
+  filterbookings,
+} = require("../../operations/admin/booking/filterbookings");
+const {
+  updatebooking,
+} = require("../../operations/admin/booking/updatebooking");
+const guestinvoices = require("../../operations/guests/ginvoices/ginvoices");
+const guestbooking = require("../../operations/guests/gbooking/gbooking");
+const guestrefund = require("../../operations/guests/grefund/grefund");
+const guestreschedule = require("../../operations/guests/reschedule/reschedule");
+const { verifyGuest } = require("../../middleware/guest/vguest");
+const gsearchinvoice = require("../../operations/guests/ginvoices/gsinvoice");
+const guestreview = require("../../operations/guests/greviews/greviews");
+const gdashstats = require("../../operations/guests/gdashstats/gdashstats");
+const {
+  ginvoiesstats,
+} = require("../../operations/guests/ginvoices/ginvoicesstats");
+const {
+  postroomstats,
+} = require("../../operations/hosts/postroomstats/postroomstats");
 const router = express.Router();
 
 // jwt signature routes
@@ -86,9 +115,38 @@ router.get(
 );
 router.get("/searchproperty", verifyJWT, verifyId, verifyAdmin, searchProperty);
 
+// booking routes
+router.get("/getbookings", verifyJWT, verifyId, verifyAdmin, getbookings);
+router.get("/filterbookings", verifyJWT, verifyId, verifyAdmin, filterbookings);
+router.patch("/updatebooking", verifyJWT, verifyId, verifyAdmin, updatebooking);
+
+// host routes - admin
+router.get("/gethosts", verifyJWT, verifyId, verifyAdmin, gethosts);
+router.get("/searchhost", verifyJWT, verifyId, verifyAdmin, searchhost);
+
+// invoice routes - admin
+router.get("/getinvoices", verifyJWT, verifyId, verifyAdmin, getinvoices);
+router.get("/searchinvoies", verifyJWT, verifyId, verifyAdmin, searchinvoices);
+router.get("/filterinvoices", verifyJWT, verifyId, verifyAdmin, filterinvoices);
+router.get("/invoicesstats", verifyJWT, verifyId, verifyAdmin, totalstats);
+
+router.get("/gbookings", verifyJWT, verifyId, verifyGuest, guestbooking);
+
+// ivnvoices routes - guest
+router.get("/ginvoices", verifyJWT, verifyId, verifyGuest, guestinvoices);
+router.get("/gsinvoice", verifyJWT, verifyId, verifyGuest, gsearchinvoice);
+router.get("/gsstats", verifyJWT, verifyId, verifyGuest, ginvoiesstats);
+
+router.patch("/grefund", verifyJWT, verifyId, verifyGuest, guestrefund);
+router.patch("/reschedule", verifyJWT, verifyId, verifyGuest, guestreschedule);
+router.patch("/review", verifyJWT, verifyId, verifyGuest, guestreview);
+
+router.get("/gdashstats", verifyJWT, verifyId, verifyGuest, gdashstats);
+
 // hosts routes / ads provider
 router.post("/insertroom", verifyJWT, verifyId, verifyHost, insertRoom);
 router.get("/getpostrooms", verifyJWT, verifyId, verifyHost, getPostRooms);
+router.get("/getroomstats", verifyJWT, verifyId, verifyHost, postroomstats);
 
 // payment interface
 

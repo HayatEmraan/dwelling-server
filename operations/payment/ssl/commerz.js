@@ -9,19 +9,27 @@ const {
 } = require("../../../db/mongodb");
 const store_id = process.env.SSL_STORE_ID;
 const store_passwd = process.env.SSL_SECRET_KEY;
+
+console.log(store_id, store_passwd);
 const is_live = false; //true for live, false for sandbox
 
 const randomIXID = new ObjectId().toString().replace(/-/g, "");
 
+function generateRandomNumber() {
+  const min = 1000000;
+  const max = 9999999;
+  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+  return randomNumber;
+}
+
 const paymentIntentSSL = async (req, res) => {
   const { uid } = req?.uid;
   const { roomID, checkIn, checkOut, guest = 1 } = req?.body;
-
   const startDate = new Date(checkIn);
   const endDate = new Date(checkOut);
   const timeDifference = endDate?.getTime() - startDate.getTime();
   const numberOfNights = Math?.ceil(timeDifference / (1000 * 60 * 60 * 24));
-
+  const orderID = generateRandomNumber();
   const findRoom = await roomsDB.findOne({ _id: new ObjectId(roomID) });
   if (!findRoom) {
     return res.status(404).send({ msg: "Room data not found" });
@@ -37,7 +45,6 @@ const paymentIntentSSL = async (req, res) => {
 
   const finalAmount = findRoom?.price + findRoom?.taxes;
   const multiplier = finalAmount * guest * numberOfNights;
-
   const data = {
     total_amount: multiplier * 106,
     currency: "BDT",
@@ -45,22 +52,22 @@ const paymentIntentSSL = async (req, res) => {
     success_url: `https://dwelling-bright-server.vercel.app/api/v2/payment/success/intent?txid=${randomIXID}&pay=true&rm=${roomID}&dwl=ling&ht=bright`,
     fail_url: `https://dwelling-bright-server.vercel.app/api/v2/payment/failed/intent?txid=${randomIXID}&pay=false&rm=${roomID}&dwl=ling&ht=bright`,
     cancel_url: `https://dwelling-bright-server.vercel.app/api/v2/payment/failed/intent?txid=${randomIXID}&pay=false&rm=${roomID}&dwl=ling&ht=bright`,
-    ipn_url: "https://dwelling-bright.vercel.app/ipn",
+    ipn_url: "http://localhost:3030/ipn",
     shipping_method: "dwelling - a commerz",
-    product_name: findRoom?.name || "",
-    product_category: findRoom?.category || "",
+    product_name: "dwelling",
+    product_category: "IB",
     product_profile: "general",
-    cus_name: guestInfo?.name || "",
-    cus_email: guestInfo?.email || "dwelling@example.com",
-    cus_add1: guestInfo?.address || "",
-    cus_add2: "",
-    cus_city: guestInfo?.city || "",
-    cus_state: "",
-    cus_postcode: guestInfo?.postcode || "",
-    cus_country: guestInfo?.country || "",
-    cus_phone: guestInfo?.phone || "0123456789",
-    cus_fax: "",
-    ship_name: "dwelling",
+    cus_name: "Customer Name",
+    cus_email: "customer@example.com",
+    cus_add1: guestInfo?.address || "Dhaka, Bangladesh",
+    cus_add2: "Dhaka - 1206",
+    cus_city: "Dhaka",
+    cus_state: "Dhaka",
+    cus_postcode: "1000",
+    cus_country: "Bangladesh",
+    cus_phone: "01711111111",
+    cus_fax: "01711111111",
+    ship_name: "Customer Name",
     ship_add1: "Dhaka",
     ship_add2: "Dhaka",
     ship_city: "Dhaka",
@@ -68,10 +75,12 @@ const paymentIntentSSL = async (req, res) => {
     ship_postcode: 1000,
     ship_country: "Bangladesh",
   };
+
   const paymentData = {
     ...req?.body,
     nights: numberOfNights,
     date: new Date(),
+    orderID,
     gateway: "ssl",
     paymentInfo: {
       txid: data?.tran_id,
@@ -112,7 +121,7 @@ const paymentFailedSSL = async (req, res) => {
       roomID: rm,
     });
     return res.redirect(
-      `https://dwelling-bright.vercel.app/payment/intent?txid=${txid}&pay=false&rm=${rm}&dwl=ling&ht=bright`
+      `https://dwelling-olive.vercel.app/payment/intent?txid=${txid}&pay=false&rm=${rm}&dwl=ling&ht=bright`
     );
   } catch (error) {
     return res.status(500).send({ msg: "Internal Server Error" });
@@ -138,7 +147,7 @@ const paymentAcceptSSL = async (req, res) => {
     await paymentDB.insertOne(findPayment);
     await pendingPaymentDB.deleteOne({ roomID: rm });
     return res.redirect(
-      `https://dwelling-bright.vercel.app/payment/intent?txid=${txid}&pay=true&rm=${rm}&dwl=ling&ht=bright`
+      `https://dwelling-olive.vercel.app/payment/intent?txid=${txid}&pay=true&rm=${rm}&dwl=ling&ht=bright`
     );
   } catch (error) {
     return res.status(500).send({ msg: "Internal Server Error" });

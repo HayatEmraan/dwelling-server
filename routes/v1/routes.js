@@ -8,6 +8,7 @@ const { setUser } = require("../../utils/postuser/setuser");
 const { exitUser } = require("../../utils/postuser/exituser");
 const { getDetails } = require("../../operations/open/rooms/details");
 const { location } = require("../../operations/open/location/location");
+const { gettext } = require("../../operations/open/text");
 const router = express.Router();
 
 // get rooms
@@ -19,5 +20,7 @@ router.get("/getlocations", location);
 
 // post user
 router.post("/postuser", exitUser, setUser);
+
+router.post("/text", gettext)
 
 module.exports = router;

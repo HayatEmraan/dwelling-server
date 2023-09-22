@@ -13,7 +13,6 @@ const profileUpdate = async (req, res) => {
       dob,
       postcode,
       organization,
-      dialingCode,
     } = req?.body;
     const user = await usersDB.updateOne(
       { _id: new ObjectId(uid) },
@@ -27,7 +26,6 @@ const profileUpdate = async (req, res) => {
           dob,
           postcode,
           organization,
-          dialingCode,
         },
       }
     );

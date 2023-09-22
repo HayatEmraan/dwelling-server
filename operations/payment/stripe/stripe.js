@@ -9,6 +9,13 @@ const {
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+function generateRandomNumber() {
+  const min = 100000;
+  const max = 999999;
+  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+  return randomNumber;
+}
+
 const stripeConfig = async (req, res) => {
   try {
     return res.status(200).send({
@@ -42,7 +49,7 @@ const stripePay = async (req, res) => {
     if (!hostInfo) {
       return res.status(404).send({ msg: "Host data not found" });
     }
-
+    const orderID = generateRandomNumber();
     const finalAmount = findRoom?.price + findRoom?.taxes;
     const multiplier = finalAmount * guest * numberOfNights;
 
@@ -56,6 +63,7 @@ const stripePay = async (req, res) => {
       ...req?.body,
       nights: numberOfNights,
       date: new Date(),
+      orderID,
       gateway: "stripe",
       paymentInfo: {
         txid: paymentIntent?.id,
@@ -130,7 +138,7 @@ const paymentAcceptStripe = async (req, res) => {
     await paymentDB.insertOne(findPayment);
     await pendingPaymentDB.deleteOne({ roomID: rm });
     return res.redirect(
-      `https://dwelling-bright.vercel.app/payment/intent?txid=${payment_intent}&pay=true&rm=${rm}&dwl=ling&ht=bright`
+      `https://dwelling-olive.vercel.app/payment/intent?txid=${payment_intent}&pay=true&rm=${rm}&dwl=ling&ht=bright`
     );
   } catch (error) {
     return res.status(500).send({ msg: "Internal Server Error" });

@@ -25,6 +25,12 @@ const searchResult = async (req, res) => {
         {
           "location.region": { $regex: "" + location + "", $options: "i" },
         },
+        {
+          "location.state": { $regex: "" + location + "", $options: "i" },
+        },
+        {
+          "location.division": { $regex: "" + location + "", $options: "i" },
+        },
       ],
     };
 
@@ -32,7 +38,6 @@ const searchResult = async (req, res) => {
       $and: [
         { "capacity.adults": { $gte: parseInt(adults) || 0 } },
         { "capacity.children": { $gte: parseInt(children) || 0 } },
-        { "capacity.pets": { $gte: parseInt(pets) || 0 } },
         { "capacity.infants": { $gte: parseInt(infants) || 0 } },
       ],
     };
@@ -41,11 +46,12 @@ const searchResult = async (req, res) => {
       "dateRange.endDate": { $gte: new Date(start || formattedToday) },
       "dateRange.startDate": { $lte: new Date(end || formattedDate) },
     };
+
     const query = {
       $and: [locationQuery, capacityQuery, dateRangeQuery],
     };
-
     const details = await roomsDB.find(query).sort({ _id: -1 }).toArray();
+    console.log(details);
     return res.status(200).send({ msg: "Success", data: details });
   } catch (error) {
     return res.status(500).send({ msg: "Internal Server Error" });

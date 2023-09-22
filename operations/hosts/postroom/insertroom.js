@@ -15,6 +15,11 @@ const insertRoom = async (req, res) => {
       _id: new ObjectId(uid),
     });
 
+    const startDate = new Date();
+    const endDate = new Date();
+    if (startDate.toDateString() === endDate.toDateString()) {
+      endDate.setDate(endDate.getDate() + 15);
+    }
     if (!uid) {
       return res.status(404).send({ msg: "author not found" });
     }
@@ -34,6 +39,10 @@ const insertRoom = async (req, res) => {
     const createdAt = formattedDate + " " + "(UTC)";
     const room = await propertyDB.insertOne({
       ...req.body,
+      dateRange: {
+        startDate: startDate,
+        endDate: endDate,
+      },
       author: {
         _id,
         name,

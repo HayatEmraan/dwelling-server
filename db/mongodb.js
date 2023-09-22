@@ -27,7 +27,6 @@ async function connectDB() {
 }
 
 const usersDB = client.db("dwelling").collection("users");
-const bookingDB = client.db("dwelling").collection("bookings");
 const reviewsDB = client.db("dwelling").collection("reviews");
 const roomsDB = client.db("dwelling").collection("rooms");
 const propertyDB = client.db("dwelling").collection("properties");
@@ -39,7 +38,6 @@ const pendingPaymentDB = client.db("dwelling").collection("pendingPayment");
 module.exports = {
   connectDB,
   usersDB,
-  bookingDB,
   reviewsDB,
   roomsDB,
   propertyDB,
