@@ -9,8 +9,6 @@ const {
 } = require("../../../db/mongodb");
 const store_id = process.env.SSL_STORE_ID;
 const store_passwd = process.env.SSL_SECRET_KEY;
-
-console.log(store_id, store_passwd);
 const is_live = false; //true for live, false for sandbox
 
 const randomIXID = new ObjectId().toString().replace(/-/g, "");
